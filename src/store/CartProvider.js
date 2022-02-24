@@ -10,7 +10,7 @@ const cartReducerFn = (state, action) => {
   if (action.type === "ADD") {
     const updatedTotalAmount =
       state.totalAmount + action.item.price * action.item.amount;
-   
+
     const existingCartItemIndex = state.items.findIndex(
       (item) => item.id === action.item.id
     );
@@ -54,6 +54,9 @@ const cartReducerFn = (state, action) => {
       totalAmount: updatedTotalAmount,
     };
   }
+  if (action.type === "CLEAR") {
+    return defaultCartState;
+  }
   return defaultCartState;
 };
 
@@ -71,11 +74,16 @@ const CartProvider = (props) => {
     cartDispatchFn({ type: "REMOVE", id: id });
   };
 
+  const clearCartHandler = () =>{
+    cartDispatchFn({type:"CLEAR"})
+  }
+
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemHandler,
     removeItem: removeItemHandler,
+    clearCart:clearCartHandler
   };
 
   return (
