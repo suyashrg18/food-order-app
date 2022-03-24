@@ -14,7 +14,7 @@ const Cart = (props) => {
   const hasItems = cartCtx.items.length > 0;
 
   const onAddtoCartHandler = (item) => {
-    cartCtx.addItem({ item, amount: 1 });
+    cartCtx.addItem(item);
   };
 
   const onRemoveFromCartHandler = (id) => {
@@ -40,7 +40,7 @@ const Cart = (props) => {
 
     setIsSubmitting(false);
     setDidSubmit(true);
-    cartCtx.clearCart()
+    cartCtx.clearCart();
   };
 
   const cartItems = (
